@@ -12,6 +12,17 @@ class AdminController extends CI_Controller {
         $this->load->library('PriceCalculator');
         $this->PriceCalculator->updateStandardPrice($newPrice);
     }
+
+    public function createUser($username, $password) {
+        // Load the User model
+        $this->load->model('UserModel');
+
+        // Create a new user
+        $user = $this->UserModel->createUser($username, $password);
+
+        // Return the created user
+        return $user;
+    }
 }
 ?>
 
