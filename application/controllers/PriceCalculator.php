@@ -8,14 +8,23 @@ class PriceCalculator extends CI_Controller {
         return ($length * $width * $height) / 5000;
     }
 
-    public function calculatePrice($weight, $length, $width, $height) {
-        $volumetricWeight = $this->calculateVolumetricWeight($length, $width, $height);
-
-        // Use the higher value for price calculation
-        $weight = max($weight, $volumetricWeight);
-
-        // Assuming standard price per kg is $10
-        return $weight * 10;
+    public function calculatePrice($packages, $from, $to) {
+        $totalPrice = 0;
+    
+        foreach ($packages as $package) {
+            $volumetricWeight = $this->calculateVolumetricWeight($package['length'], $package['width'], $package['height']);
+    
+            // Use the higher value for price calculation
+            $weight = max($package['weight'], $volumetricWeight);
+    
+            // Retrieve standard price per kg from PriceModel
+            $this->load->model('PriceModel');
+            $standardPrice = $this->PriceModel->getStandardPrice();
+    
+            $totalPrice += $weight * $standardPrice;
+        }
+    
+        return $totalPrice;
     }
 }
 ?>
