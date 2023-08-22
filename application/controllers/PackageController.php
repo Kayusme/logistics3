@@ -18,6 +18,17 @@ class PackageController extends CI_Controller {
     public function deletePackage($id) {
         // Logic to delete the package from the database
     }
+
+    public function updateStatus($consignmentId, $status) {
+        // Load the Consignment model
+        $this->load->model('ConsignmentModel');
+
+        // Update the status of the consignment
+        $consignment = $this->ConsignmentModel->updateStatus($consignmentId, $status);
+
+        // Return the updated consignment
+        return $consignment;
+    }
 }
 ?>
 
