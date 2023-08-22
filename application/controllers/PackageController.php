@@ -18,6 +18,19 @@ class PackageController extends CI_Controller {
     public function deletePackage($id) {
         // Logic to delete the package from the database
     }
+
+    public function updateStatus($package_id, $status) {
+        $this->load->model('PackageModel');
+        $isUpdated = $this->PackageModel->updateStatus($package_id, $status);
+
+        if ($isUpdated) {
+            // Logic for successful status update
+            return true;
+        } else {
+            // Logic for unsuccessful status update
+            return false;
+        }
+    }
 }
 ?>
 
