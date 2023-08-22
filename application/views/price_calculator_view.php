@@ -1,14 +1,16 @@
 <html>
 <head>
     <title>Price Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/custom.css">
 </head>
 <body>
     <h1>Price Calculator</h1>
-    <form action="/price_calculator/calculate" method="post">
-        <div id="packages">
+    <form action="/price_calculator/calculate" method="post" class="form">
+        <div id="packages" class="form-group">
             <div class="package">
                 <label for="weight">Weight:</label>
-                <input type="number" id="weight" name="packages[0][weight]">
+                <input type="number" id="weight" name="packages[0][weight]" class="form-control">
                 <label for="length">Length:</label>
                 <input type="number" id="length" name="packages[0][length]">
                 <label for="width">Width:</label>
@@ -24,6 +26,8 @@
         <button type="button" onclick="addPackage()">Add another package</button>
         <input type="submit" value="Calculate">
     </form>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+    <script src="/assets/custom.js"></script>
     <script>
         var packageIndex = 1;
         function addPackage() {
