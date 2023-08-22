@@ -28,11 +28,23 @@ class PackageController extends CI_Controller {
         // Load the Consignment model
         $this->load->model('ConsignmentModel');
 
+        // Check if the consignment exists
+        if (!$this->ConsignmentModel->consignment_exists($id)) {
+            return array('status' => 'error', 'message' => 'Consignment does not exist');
+        }
+
+        // Validate the status
+        if (!$this->ConsignmentModel->validate_status($status)) {
+            return array('status' => 'error', 'message' => 'Invalid status');
+        }
+
         // Update the status of the consignment in the database
         $result = $this->ConsignmentModel->update_status($id, $status);
 
         // Return an appropriate response
         if ($result) {
+            // Log the status update
+            $this->ConsignmentModel->log_status_update($id, $status);
             return array('status' => 'success', 'message' => 'Consignment status updated successfully');
         } else {
             return array('status' => 'error', 'message' => 'Failed to update consignment status');
