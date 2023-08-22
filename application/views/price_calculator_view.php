@@ -17,6 +17,10 @@
                 <input type="number" id="height" name="packages[0][height]">
             </div>
         </div>
+        <label for="from">From:</label>
+        <input type="text" id="from" name="from">
+        <label for="to">To:</label>
+        <input type="text" id="to" name="to">
         <button type="button" onclick="addPackage()">Add another package</button>
         <input type="submit" value="Calculate">
     </form>
